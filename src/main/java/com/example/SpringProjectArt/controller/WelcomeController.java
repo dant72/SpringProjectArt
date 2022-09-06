@@ -1,16 +1,12 @@
 package com.example.SpringProjectArt.controller;
 
-import com.example.SpringProjectArt.dto.UserDto;
 import com.example.SpringProjectArt.model.User;
 import com.example.SpringProjectArt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+
 
 @RestController
 public class WelcomeController
@@ -27,29 +23,27 @@ public class WelcomeController
 	@GetMapping("/welcome")
 	public String Welcome()
 	{
-		User user = new User();
-		user.setFirstName("Tom");
-		user.setLastName("Tomson");
-		user.setEmail("email434");
-		user.setUsername("User2222");
-		user.setPassword("test");
-
-		userService.register(user);
-
-		return "Welcome to spring boot app";
+		return "Welcome to spring boot app!";
 	}
 
-	@PostMapping("/register")
-	public void register(@RequestBody UserDto userDto)
-	{
-		User user = new User();
-		user.setFirstName(userDto.getFirstName());
-		user.setLastName(userDto.getLastName());
-		user.setEmail(userDto.getEmail());
-		user.setUsername(userDto.getUsername());
-		user.setPassword(userDto.getPassword());
+	@GetMapping("/register")
+	public String register(HttpServletRequest request) {
 
-		userService.register(user);
+		try {
+			User user = new User();
+			user.setFirstName(request.getParameter("firstName"));
+			user.setLastName(request.getParameter("lastName"));
+			user.setEmail(request.getParameter("email"));
+			user.setUsername(request.getParameter("username"));
+			user.setPassword(request.getParameter("password"));
+
+			userService.register(user);
+
+			return "Register successful!";
+		}
+		catch (Exception ex)
+		{
+			return ex.getMessage();
+		}
 	}
-
 }
