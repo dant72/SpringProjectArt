@@ -104,5 +104,81 @@
             <column name="name" value="ROLE_ADMIN" />
         </insert>
     </changeSet>
+    <changeSet id="1.0.5" author="dkutyrev">
+        <createTable tableName="products">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="img_url" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="price" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created" type="TIMESTAMP" defaultValue="CURRENT_TIMESTAMP()">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated" type="TIMESTAMP" defaultValue="CURRENT_TIMESTAMP()">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="status" type="VARCHAR(25)" defaultValue="ACTIVE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1.0.6" author="dkutyrev">
+        <createTable tableName="carts">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1.0.7" author="dkutyrev">
+        <createTable tableName="cart_products">
+
+            <column name="product_id" type="BIGINT"/>
+
+            <column name="cart_id" type="BIGINT"/>
+
+            <column name="count" type="BIGINT"/>
+
+        </createTable>
+    </changeSet>
+    <changeSet id="1.0.8" author="dkutyrev">
+        <addForeignKeyConstraint baseTableName="cart_products"
+                                 baseColumnNames="product_id"
+                                 constraintName="fk_cart_products_products"
+                                 referencedTableName="products"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT" />
+
+        <addForeignKeyConstraint baseTableName="cart_products"
+                                 baseColumnNames="cart_id"
+                                 constraintName="fk_cart_products_carts"
+                                 referencedTableName="carts"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT" />
+    </changeSet>
+    <changeSet id="1.0.9" author="dkutyrev">
+        <addForeignKeyConstraint baseTableName="carts"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_cart_user"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT" />
+    </changeSet>
 
 </databaseChangeLog>
