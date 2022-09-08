@@ -1,5 +1,8 @@
 package com.example.SpringProjectArt.servlet;
 
+import com.example.SpringProjectArt.service.ProductService;
+import org.hibernate.service.spi.InjectService;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;

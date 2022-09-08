@@ -14,14 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 public class WelcomeController
 {
 	private final UserService userService;
-	private final ProductService productService;
 
 
 	@Autowired
-	public WelcomeController(UserService userService, ProductService productService)
+	public WelcomeController(UserService userService)
 	{
 		this.userService = userService;
-		this.productService = productService;
 	}
 
 	@GetMapping("/welcome")
@@ -30,7 +28,7 @@ public class WelcomeController
 		return "Welcome to spring boot app!";
 	}
 
-	@GetMapping("/register")
+	@PostMapping("/register")
 	public String register(HttpServletRequest request) {
 
 		try {
@@ -44,24 +42,6 @@ public class WelcomeController
 			userService.register(user);
 
 			return "Register successful!";
-		}
-		catch (Exception ex)
-		{
-			return ex.getMessage();
-		}
-	}
-
-	@GetMapping("/product")
-	public String registerProduct(HttpServletRequest request) {
-
-		try {
-			Product product = new Product();
-			product.setName(request.getParameter("name"));
-			product.setPrice(Integer.parseInt(request.getParameter("price")));
-
-			productService.register(product);
-
-			return "Register product successful!";
 		}
 		catch (Exception ex)
 		{
