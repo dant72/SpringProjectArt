@@ -1,5 +1,6 @@
 package com.example.SpringProjectArt.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Generated;
 import org.springframework.data.annotation.CreatedDate;
@@ -17,13 +18,17 @@ public class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @CreatedDate
     @Column(name="created")
     private Date created;
 
+    @JsonIgnore
     @LastModifiedDate
     @Column(name="updated")
     private  Date update;
+
+    @JsonIgnore
     @Enumerated(EnumType.STRING)
     @Column(name="status")
     private Status status;

@@ -1,5 +1,7 @@
 package com.example.SpringProjectArt.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,6 +18,7 @@ public class Product extends BaseEntity{
     @Column(name="price")
     private int price;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
     private List<Cart> carts;
 }

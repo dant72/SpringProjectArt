@@ -154,23 +154,6 @@
 
         </createTable>
     </changeSet>
-    <changeSet id="1.0.8" author="dkutyrev">
-        <addForeignKeyConstraint baseTableName="cart_products"
-                                 baseColumnNames="product_id"
-                                 constraintName="fk_cart_products_products"
-                                 referencedTableName="products"
-                                 referencedColumnNames="id"
-                                 onDelete="CASCADE"
-                                 onUpdate="RESTRICT" />
-
-        <addForeignKeyConstraint baseTableName="cart_products"
-                                 baseColumnNames="cart_id"
-                                 constraintName="fk_cart_products_carts"
-                                 referencedTableName="carts"
-                                 referencedColumnNames="id"
-                                 onDelete="CASCADE"
-                                 onUpdate="RESTRICT" />
-    </changeSet>
     <changeSet id="1.0.9" author="dkutyrev">
         <addForeignKeyConstraint baseTableName="carts"
                                  baseColumnNames="user_id"

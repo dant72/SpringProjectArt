@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 @RestController
@@ -47,5 +48,12 @@ public class WelcomeController
 		{
 			return ex.getMessage();
 		}
+	}
+
+
+	@GetMapping("/users")
+	public List<User> Users()
+	{
+		return userService.getAll();
 	}
 }

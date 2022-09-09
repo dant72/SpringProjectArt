@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 public class ProductController {
@@ -38,5 +39,10 @@ public class ProductController {
         {
             return ex.getMessage();
         }
+    }
+
+    @GetMapping("/products")
+    public List<Product> getProducts() {
+        return productService.getAll();
     }
 }
