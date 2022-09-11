@@ -34,9 +34,6 @@ public class UserServiceImpl implements UserService {
         List<Role>  userRoles = new ArrayList<>();
         userRoles.add(roleUser);
         user.setRoles(userRoles);
-        user.setStatus(Status.ACTIVE);
-        user.setCreated(new Date());
-        user.setUpdate(new Date());
 
         User registeredUser = userRepository.save(user);
 

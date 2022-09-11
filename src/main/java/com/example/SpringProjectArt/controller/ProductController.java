@@ -2,7 +2,6 @@ package com.example.SpringProjectArt.controller;
 
 import com.example.SpringProjectArt.model.Product;
 import com.example.SpringProjectArt.service.ProductService;
-import com.example.SpringProjectArt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

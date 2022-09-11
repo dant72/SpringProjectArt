@@ -31,4 +31,8 @@ public class User extends BaseEntity {
     joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
     inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName = "id")})
     private List<Role> roles;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id", referencedColumnName = "user_id")
+    private Cart cart;
 }

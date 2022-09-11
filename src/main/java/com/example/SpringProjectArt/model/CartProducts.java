@@ -11,9 +11,9 @@ import java.util.List;
 public class CartProducts {
 
     @Column(name = "cart_id")
-    private int cartId;
+    private Long cartId;
     @Column(name = "product_id")
-    private int productId;
+    private Long productId;
     @Column(name = "count")
     private int count;
 

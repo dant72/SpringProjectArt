@@ -16,20 +16,6 @@ import javax.persistence.*;
 public class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @JsonIgnore
-    @CreatedDate
-    @Column(name="created")
-    private Date created;
-
-    @JsonIgnore
-    @LastModifiedDate
-    @Column(name="updated")
-    private  Date update;
-
-    @JsonIgnore
-    @Enumerated(EnumType.STRING)
-    @Column(name="status")
-    private Status status;
+    @Column(name = "id")
+    private Long id = 0L;
 }

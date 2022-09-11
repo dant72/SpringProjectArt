@@ -25,9 +25,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product register(Product product) {
 
-        product.setStatus(Status.ACTIVE);
-        product.setCreated(new Date());
-        product.setUpdate(new Date());
 
         productRepository.save(product);
 

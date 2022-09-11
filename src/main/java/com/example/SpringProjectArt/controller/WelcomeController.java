@@ -1,7 +1,9 @@
 package com.example.SpringProjectArt.controller;
 
+import com.example.SpringProjectArt.model.Cart;
 import com.example.SpringProjectArt.model.Product;
 import com.example.SpringProjectArt.model.User;
+import com.example.SpringProjectArt.service.CartService;
 import com.example.SpringProjectArt.service.ProductService;
 import com.example.SpringProjectArt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +19,14 @@ import java.util.List;
 public class WelcomeController
 {
 	private final UserService userService;
+	private final CartService cartService;
 
 
 	@Autowired
-	public WelcomeController(UserService userService)
+	public WelcomeController(UserService userService, CartService cartService)
 	{
 		this.userService = userService;
+		this.cartService = cartService;
 	}
 
 	@GetMapping("/welcome")
@@ -42,7 +46,14 @@ public class WelcomeController
 			user.setUsername(request.getParameter("username"));
 			user.setPassword(request.getParameter("password"));
 
-			userService.register(user);
+			var createdUser = userService.register(user);
+
+			if (createdUser != null)
+			{
+				var cart = new Cart();
+				cart.setUserId(createdUser.getId());
+				cartService.add(cart);
+			}
 
 			return "Register successful!";
 		}
