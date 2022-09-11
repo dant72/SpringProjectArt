@@ -12,7 +12,25 @@ import java.io.IOException;
 public class MyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().print("<html><head></head><body><h1>Welcome!</h1><p>This is a very cool page!</p></body></html>");
+        String cook = "";
+
+
+        response.addCookie(new Cookie("user", "Hello"));
+        var cookies = request.getCookies();
+        for(Cookie c: cookies)
+        {
+            cook = c.getName() + " " + c.getValue() + "\n";
+        }
+
+        response.getWriter().print("<html>" +
+                "<head>" +
+                "</head>" +
+                "<body>" +
+                "<h1>Welcome!</h1>" +
+                "<p>This is a very cool page!</p>" + cook +
+                "</body>" +
+                "</html>");
+
 
     }
 

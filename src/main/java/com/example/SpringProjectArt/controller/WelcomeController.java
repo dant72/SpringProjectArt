@@ -7,7 +7,9 @@ import com.example.SpringProjectArt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -43,6 +45,36 @@ public class WelcomeController
 			userService.register(user);
 
 			return "Register successful!";
+		}
+		catch (Exception ex)
+		{
+			return ex.getMessage();
+		}
+	}
+
+	@PostMapping("/login")
+	public String login(HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+
+			var user = userService.findByUsername(request.getParameter("username"));
+
+			if (user != null)
+			{
+				if (user.getPassword().equals(request.getParameter("password")))
+				{
+					response.addCookie(new Cookie("userId", user.getId().toString()));
+					return "user " + request.getParameter("username") + " login!";
+				}
+				else
+				{
+					return "Incorrect password! " +  request.getParameter("password") + " != " + user.getPassword();
+				}
+			}
+			else
+			{
+				return "This user dont exist";
+			}
 		}
 		catch (Exception ex)
 		{
